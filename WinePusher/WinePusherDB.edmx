@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="winepusherModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="members">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoundId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="Bottles" Type="int" />
+          <Property Name="Delivered" Type="char" MaxLength="1" />
+          <Property Name="Paid" Type="char" MaxLength="1" />
+          <Property Name="Status" Type="char" MaxLength="1" />
+          <Property Name="Date" Type="datetime" Precision="0" />
+          <Property Name="Timestamp" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="rounds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WineId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="char" MaxLength="10" />
+          <Property Name="Date" Type="datetime" Precision="0" />
+          <Property Name="Timestamp" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="wines">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="45" />
+          <Property Name="Name" Type="varchar" MaxLength="45" />
+          <Property Name="Store" Type="varchar" MaxLength="45" />
+          <Property Name="Price" Type="decimal" Precision="15" Scale="2" />
+        </EntityType>
+        <Association Name="MemberId">
+          <End Role="members" Type="Self.members" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoundId">
+          <End Role="rounds" Type="Self.rounds" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rounds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="RoundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="WineId">
+          <End Role="wines" Type="Self.wines" Multiplicity="1" />
+          <End Role="rounds" Type="Self.rounds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="wines">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="rounds">
+              <PropertyRef Name="WineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="winepusherModelStoreContainer">
+          <EntitySet Name="members" EntityType="Self.members" Schema="winepusher" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="winepusher" store:Type="Tables" />
+          <EntitySet Name="rounds" EntityType="Self.rounds" Schema="winepusher" store:Type="Tables" />
+          <EntitySet Name="wines" EntityType="Self.wines" Schema="winepusher" store:Type="Tables" />
+          <AssociationSet Name="MemberId" Association="Self.MemberId">
+            <End Role="members" EntitySet="members" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="RoundId" Association="Self.RoundId">
+            <End Role="rounds" EntitySet="rounds" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="WineId" Association="Self.WineId">
+            <End Role="wines" EntitySet="wines" />
+            <End Role="rounds" EntitySet="rounds" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="winepusherModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="members">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="orders" Relationship="winepusherModel.MemberId" FromRole="members" ToRole="orders" />
+        </EntityType>
+        <EntityContainer Name="winepusherEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="members" EntityType="Self.members" />
+          <EntitySet Name="orders" EntityType="winepusherModel.orders" />
+          <EntitySet Name="rounds" EntityType="winepusherModel.rounds" />
+          <EntitySet Name="wines" EntityType="winepusherModel.wines" />
+          <AssociationSet Name="MemberId" Association="winepusherModel.MemberId">
+            <End Role="members" EntitySet="members" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="RoundId" Association="winepusherModel.RoundId">
+            <End Role="rounds" EntitySet="rounds" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="WineId" Association="winepusherModel.WineId">
+            <End Role="wines" EntitySet="wines" />
+            <End Role="rounds" EntitySet="rounds" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoundId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="Bottles" Type="Int32" />
+          <Property Name="Delivered" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Paid" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="members" Relationship="winepusherModel.MemberId" FromRole="orders" ToRole="members" />
+          <NavigationProperty Name="rounds" Relationship="winepusherModel.RoundId" FromRole="orders" ToRole="rounds" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="rounds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WineId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" />
+          <Property Name="Timestamp" Type="DateTime" />
+          <NavigationProperty Name="orders" Relationship="winepusherModel.RoundId" FromRole="rounds" ToRole="orders" />
+          <NavigationProperty Name="wines" Relationship="winepusherModel.WineId" FromRole="rounds" ToRole="wines" />
+        </EntityType>
+        <EntityType Name="wines">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Store" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" />
+          <NavigationProperty Name="rounds" Relationship="winepusherModel.WineId" FromRole="wines" ToRole="rounds" />
+        </EntityType>
+        <Association Name="MemberId">
+          <End Type="winepusherModel.members" Role="members" Multiplicity="1" />
+          <End Type="winepusherModel.orders" Role="orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoundId">
+          <End Type="winepusherModel.rounds" Role="rounds" Multiplicity="1" />
+          <End Type="winepusherModel.orders" Role="orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rounds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="RoundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="WineId">
+          <End Type="winepusherModel.wines" Role="wines" Multiplicity="1" />
+          <End Type="winepusherModel.rounds" Role="rounds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="wines">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="rounds">
+              <PropertyRef Name="WineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="winepusherModelStoreContainer" CdmEntityContainer="winepusherEntities">
+          <EntitySetMapping Name="members">
+            <EntityTypeMapping TypeName="winepusherModel.members">
+              <MappingFragment StoreEntitySet="members">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="winepusherModel.orders">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
+                <ScalarProperty Name="Delivered" ColumnName="Delivered" />
+                <ScalarProperty Name="Bottles" ColumnName="Bottles" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="RoundId" ColumnName="RoundId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rounds">
+            <EntityTypeMapping TypeName="winepusherModel.rounds">
+              <MappingFragment StoreEntitySet="rounds">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="WineId" ColumnName="WineId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wines">
+            <EntityTypeMapping TypeName="winepusherModel.wines">
+              <MappingFragment StoreEntitySet="wines">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Store" ColumnName="Store" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
