@@ -50,7 +50,7 @@
                                 <asp:BoundField DataField="WineName" HeaderText="Vinnavn" />
                                 <asp:BoundField DataField="Store" HeaderText="Butik" />
                                 <asp:BoundField DataField="WinePrice" HeaderText="Pris" />
-                                <asp:ButtonField CommandName="listOrders" DataTextField="OrdersCount" HeaderText="Antal ordrer" Text="OrdersCount">
+                                <asp:ButtonField CommandName="listOrders" DataTextField="OrdersCount" HeaderText="Ordrer" Text="OrdersCount">
                                     <ControlStyle ForeColor="White" />
                                     <ItemStyle ForeColor="White" />
                                 </asp:ButtonField>

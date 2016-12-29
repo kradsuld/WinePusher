@@ -8,16 +8,17 @@ namespace WinePusher
     {
         private int _roundId;
         private decimal _winePrice;
+        private int _orderId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-                var orderId = Request.QueryString["OrderId"];
+            _orderId = Convert.ToInt32(Request.QueryString["OrderId"]);
 
-                OrderHandler oh = new OrderHandler();
-                Order order = oh.GetOrder(Convert.ToInt32(orderId));
+            OrderHandler oh = new OrderHandler();
+            Order order = oh.GetOrder(_orderId);
 
-                _roundId = order.RoundId;
-                _winePrice = order.WinePrice;
+            _roundId = order.RoundId;
+            _winePrice = order.WinePrice;
 
             if (!IsPostBack)
             {
@@ -35,11 +36,22 @@ namespace WinePusher
 
         protected void btnSaveOrder_Click(object sender, EventArgs e)
         {
+            OrderHandler oh = new OrderHandler();
+            oh.UpdateOrder(_orderId,
+                           Convert.ToInt32(ddBottles.SelectedValue),
+                           ddDeliveredMark.SelectedValue,
+                           ddPaidMark.SelectedValue);
+
             Response.Redirect("ListOrders.aspx?RoundId=" + _roundId);
         }
         protected void btnDeleteOrder_Click(object sender, EventArgs e)
         {
+            OrderHandler oh = new OrderHandler();
+            oh.UpdateOrder(_orderId,
+                           "D"
+                           );
 
+            Response.Redirect("ListOrders.aspx?RoundId=" + _roundId);
         }
         protected void btnBack_Click(object sender, EventArgs e)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using WinePusher.Models;
 
@@ -11,6 +12,46 @@ namespace WinePusher.BusinessLogic
 
         public OrderHandler()
         {
+        }
+
+        public void UpdateOrder(int OrderId, int Bottles, string Delivered, string Paid)
+        {
+            orders order = new orders();
+            order = wpe.orders.Where(o => o.Id == OrderId).SingleOrDefault();
+
+            order.Bottles = Bottles;
+            order.Delivered = Delivered;
+            order.Paid = Paid;
+
+            wpe.Entry(order).State = EntityState.Modified;
+
+            try
+            {
+                wpe.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void UpdateOrder(int OrderId, string Status)
+        {
+            orders order = new orders();
+            order = wpe.orders.Where(o => o.Id == OrderId).SingleOrDefault();
+
+            order.Status = Status;
+
+            wpe.Entry(order).State = EntityState.Modified;
+
+            try
+            {
+                wpe.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void CreateOrder(int RoundId, int MemberId, int Bottles, string Delivered, string Paid, string Status)
@@ -34,10 +75,12 @@ namespace WinePusher.BusinessLogic
             {
                 throw ex;
             }
-
         }
-        public List<OrderListItem> ListOrders(int RoundId)
+
+        public List<OrderListItem> ListActiveOrders(int RoundId)
         {
+            var statusList = new[] { "A", "B", "C" };
+
             List<OrderListItem> orderListItemList = wpe.orders
                                                    .Join(wpe.rounds,
                                                       o => o.RoundId,
@@ -51,13 +94,13 @@ namespace WinePusher.BusinessLogic
                                                       row => row.ro.o.MemberId,
                                                       m => m.Id,
                                                    (row, m) => new { row, m })
-                                                   .Where(rowm => rowm.row.ro.r.Id == RoundId)
+                                                   .Where(rowm => rowm.row.ro.r.Id == RoundId && statusList.Contains(rowm.row.ro.o.Status))
                                                    .Select(rowmw => new OrderListItem
                                                    {
                                                        OrderId = rowmw.row.ro.o.Id,
                                                        MemberName = rowmw.m.Name,
                                                        OrderDate = rowmw.row.ro.o.Date,
-                                                       WineName = rowmw.row.w.Name,
+                                                       Bottles = (int)rowmw.row.ro.o.Bottles,
                                                        TotalAmount = (decimal)rowmw.row.w.Price * (decimal)rowmw.row.ro.o.Bottles,
                                                        Delivered = rowmw.row.ro.o.Delivered == "N" ? "Nej" : (rowmw.row.ro.o.Delivered == "Y" ? "Ja" : null),
                                                        Paid = rowmw.row.ro.o.Paid == "N" ? "Nej" : (rowmw.row.ro.o.Paid == "Y" ? "Ja" : null),

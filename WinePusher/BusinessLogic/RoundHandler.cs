@@ -32,7 +32,7 @@ namespace WinePusher.BusinessLogic
         }
         public List<RoundListItem> ListRounds()
         {
-            var statusList = new[] { "A", "B" };
+            var statusList = new[] { "A", "B", "C" };
 
             List<RoundListItem> roundListItemList = wpe.rounds
                                                    .Join(wpe.wines,
@@ -42,7 +42,7 @@ namespace WinePusher.BusinessLogic
                                                    .GroupJoin(wpe.orders,
                                                       o => o.round.Id,
                                                       order => order.RoundId,
-                                                      (o, order) => new { o, orderCount = order.Count() })
+                                                      (o, order) => new { o, orderCount = (order.Where(oc => statusList.Contains(oc.Status)).Count()) })
                                                    .Where(w => statusList.Contains(w.o.round.Status))
                                                    .GroupBy(w => new
                                                    {

@@ -11,7 +11,7 @@ namespace WinePusher
             var roundId = Request.QueryString["RoundId"];
 
             OrderHandler oh = new OrderHandler();
-            gvOrdersList.DataSource = oh.ListOrders(Convert.ToInt32(roundId));
+            gvOrdersList.DataSource = oh.ListActiveOrders(Convert.ToInt32(roundId));
             gvOrdersList.DataBind();
         }
         protected void gvOrdersList_RowCommand(object sender, GridViewCommandEventArgs e)

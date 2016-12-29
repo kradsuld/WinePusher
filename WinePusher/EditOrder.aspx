@@ -158,7 +158,7 @@
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="ddPaidMark" runat="server">
-                                        <asp:ListItem Value="J">Ja</asp:ListItem>
+                                        <asp:ListItem Value="Y">Ja</asp:ListItem>
                                         <asp:ListItem Value="N">Nej</asp:ListItem>
                                     </asp:DropDownList>
                                 </td>

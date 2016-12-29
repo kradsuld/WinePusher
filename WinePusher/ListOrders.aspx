@@ -47,7 +47,7 @@
                                 </asp:ButtonField>
                                 <asp:BoundField DataField="OrderDate" HeaderText="Dato" DataFormatString="{0:dd/MM/yyyy}" ReadOnly="True" />
                                 <asp:BoundField DataField="MemberName" HeaderText="Medlem" />
-                                <asp:BoundField DataField="WineName" HeaderText="Vinnavn" />
+                                <asp:BoundField DataField="Bottles" HeaderText="Flasker" />
                                 <asp:BoundField DataField="TotalAmount" HeaderText="Ordrebeløb" />
                                 <asp:BoundField DataField="Delivered" HeaderText="Leveret" />
                                 <asp:BoundField DataField="Paid" HeaderText="Betalt" />
