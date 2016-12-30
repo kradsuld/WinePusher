@@ -33,6 +33,7 @@ namespace WinePusher
         }
         protected void btnBack_Click(object sender, EventArgs e)
         {
+            //Response.Redirect(Request.UrlReferrer.ToString());
             Response.Redirect("WinePusher.aspx");
         }
     }

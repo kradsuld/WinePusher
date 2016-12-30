@@ -6,21 +6,13 @@
 <head runat="server">
     <title></title>
     <style type="text/css">
-        .auto-style1 {
-            width: 1148px;
-        }
-
-        .auto-style5 {
-            height: 475px;
-        }
-
-        .auto-style6 {
-            height: 23px;
-        }
-
         .centered-table {
             margin-left: auto;
             margin-right: auto;
+        }
+
+        .auto-style7 {
+            width: 20px;
         }
     </style>
 </head>
@@ -42,22 +34,26 @@
                     <td style="border-width: 0px;">
                         <table style="width: 100%;">
                             <tr>
-                                <td>&nbsp;</td>
+                                <td class="auto-style7">&nbsp;</td>
                                 <td colspan="4">
-                                    <asp:Label ID="lblCreateOrder" runat="server" Text="Opret ordre til  " Font-Bold="True" Font-Size="X-Large"></asp:Label>
-                                    <asp:Label ID="lbloWineName" runat="server" Text="*" Font-Bold="True" Font-Size="X-Large"></asp:Label>
-                                    <asp:Label ID="lblFrom" runat="server" Text="fra" Font-Bold="True" Font-Size="X-Large"></asp:Label>
-                                    <asp:Label ID="lbloStore" runat="server" Text="*" Font-Bold="True" Font-Size="X-Large"></asp:Label>
-                                    <asp:Label ID="lblPrice" runat="server" Text="til kr." Font-Bold="True" Font-Size="X-Large"></asp:Label>
-                                    <asp:Label ID="lbloPrice" runat="server" Text="*" Font-Bold="True" Font-Size="X-Large"></asp:Label>
+                                    <asp:Label ID="lblCreateOrder" runat="server" Text="Opret ordre til :" Font-Bold="True" Font-Size="X-Large"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 20px">&nbsp;</td>
-
+                                <td class="auto-style7">&nbsp;</td>
+                                <td colspan="4">
+                                    <asp:Label ID="lbloWineName" runat="server" Text="*" Font-Bold="True" Font-Size="Large"></asp:Label>
+                                    <asp:Label ID="lblFrom" runat="server" Text="fra" Font-Bold="True" Font-Size="Large"></asp:Label>
+                                    <asp:Label ID="lbloStore" runat="server" Text="*" Font-Bold="True" Font-Size="Large"></asp:Label>
+                                    <asp:Label ID="lblPrice" runat="server" Text="til kr." Font-Bold="True" Font-Size="Large"></asp:Label>
+                                    <asp:Label ID="lbloPrice" runat="server" Text="*" Font-Bold="True" Font-Size="Large"></asp:Label>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="width: 20px">&nbsp;</td>
+                                <td class="auto-style7">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style7">&nbsp;</td>
                                 <td style="width: 150px">
                                     <asp:Label ID="lblMember" runat="server" Text="Medlem"></asp:Label>
                                 </td>
@@ -73,7 +69,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>&nbsp;</td>
+                                <td class="auto-style7">&nbsp;</td>
                                 <td>
                                     <asp:Label ID="lblNumberOfBottles" runat="server" Text="Antal flasker"></asp:Label>
                                 </td>
@@ -90,12 +86,12 @@
                                         <asp:ListItem>6</asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
-                                    <td>
-                                        <asp:RequiredFieldValidator ID="rfvBottles" runat="server" ControlToValidate="ddBottles" ErrorMessage="Vælg antal flasker"></asp:RequiredFieldValidator>
-                                    </td>
+                                <td>
+                                    <asp:RequiredFieldValidator ID="rfvBottles" runat="server" ControlToValidate="ddBottles" ErrorMessage="Vælg antal flasker"></asp:RequiredFieldValidator>
+                                </td>
                             </tr>
                         </table>
-                    </td>
+            </td>
                 </tr>
                 <tr>
                     <td style="padding: 5px; border-width: 0px; text-align: left; vertical-align: middle;">
@@ -103,13 +99,13 @@
                     </td>
                 </tr>
 
-                <tr>
-                    <td style="padding: 5px; border-width: 0px; text-align: left; vertical-align: middle;">
-                        <asp:Button ID="btnSaveOrder" runat="server" Text="Gem ordre" OnClick="btnSaveOrder_Click" />
-                        &nbsp;                
+            <tr>
+                <td style="padding: 5px; border-width: 0px; text-align: left; vertical-align: middle;">
+                    <asp:Button ID="btnSaveOrder" runat="server" Text="Gem ordre" OnClick="btnSaveOrder_Click" />
+                    &nbsp;                
                         <asp:Button ID="btnBack" runat="server" CausesValidation="false" Text="Tilbage" OnClick="btnBack_Click" />
-                    </td>
-                </tr>
+                </td>
+            </tr>
             </table>
         </div>
     </form>

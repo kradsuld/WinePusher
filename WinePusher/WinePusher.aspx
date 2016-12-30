@@ -40,7 +40,7 @@
                     <td class="HeaderPadding" style="border-width: 0px; text-align: center">
                         <asp:GridView ID="gvRoundsList" OnRowCommand="gvRoundsList_RowCommand" runat="server" AutoGenerateColumns="False" AllowSorting="True" BackColor="#990000" CellPadding="5" Width="100%" BorderStyle="Groove" HorizontalAlign="Center" DataKeyNames="RoundId">
                             <Columns>
-                                <asp:ButtonField ButtonType="Link" CommandName="addOrder" Text="Tilføj ordre">
+                                <asp:ButtonField ButtonType="Image" CommandName="addOrder" Text="Tilføj ordre" ImageUrl="~/Images/insert_object.png">
                                     <ControlStyle ForeColor="White" />
                                     <ItemStyle ForeColor="White" />
                                 </asp:ButtonField>
