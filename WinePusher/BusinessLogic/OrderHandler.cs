@@ -102,8 +102,8 @@ namespace WinePusher.BusinessLogic
                                                        OrderDate = rowmw.row.ro.o.Date,
                                                        Bottles = (int)rowmw.row.ro.o.Bottles,
                                                        TotalAmount = (decimal)rowmw.row.w.Price * (decimal)rowmw.row.ro.o.Bottles,
-                                                       Delivered = rowmw.row.ro.o.Delivered == "N" ? "Nej" : (rowmw.row.ro.o.Delivered == "Y" ? "Ja" : null),
-                                                       Paid = rowmw.row.ro.o.Paid == "N" ? "Nej" : (rowmw.row.ro.o.Paid == "Y" ? "Ja" : null),
+                                                       Delivered = rowmw.row.ro.o.Delivered,
+                                                       Paid = rowmw.row.ro.o.Paid,
                                                    }).ToList();
             return orderListItemList;
         }

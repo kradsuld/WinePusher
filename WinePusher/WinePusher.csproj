@@ -116,8 +116,10 @@
     <Content Include="EditOrder.aspx" />
     <Content Include="CreateRound.aspx" />
     <Content Include="Images\banner.jpg" />
-    <Content Include="Images\edit_object.png" />
-    <Content Include="Images\insert_object.png" />
+    <Content Include="Images\check.png" />
+    <Content Include="Images\edit.png" />
+    <Content Include="Images\insert.png" />
+    <Content Include="Images\no.png" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

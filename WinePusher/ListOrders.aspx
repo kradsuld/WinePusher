@@ -46,10 +46,10 @@
                 </tr>
                 <tr>
                     <td class="HeaderPadding" style="border-width: 0px; text-align: center">
-                        <asp:GridView ID="gvOrdersList" OnRowCommand="gvOrdersList_RowCommand" runat="server" AutoGenerateColumns="False" AllowSorting="True" BackColor="#990000" CellPadding="5" Width="100%" BorderStyle="Groove" HorizontalAlign="Center" DataKeyNames="OrderId">
+                        <asp:GridView ID="gvOrdersList" OnRowCommand="gvOrdersList_RowCommand" OnRowDataBound="gvOrdersList_RowDataBound" runat="server" AutoGenerateColumns="False" AllowSorting="True" BackColor="#990000" CellPadding="5" Width="100%" BorderStyle="Groove" HorizontalAlign="Center" DataKeyNames="OrderId">
                             <Columns>
                                 <asp:BoundField DataField="OrderId" Visible="False" />
-                                <asp:ButtonField ButtonType="Image" CommandName="editOrder" Text="Ret ordre" FooterText="Ret ordre" ImageUrl="~/Images/edit_object.png">
+                                <asp:ButtonField ButtonType="Image" CommandName="editOrder" Text="Ret ordre" FooterText="Ret ordre" ImageUrl="~/Images/edit.png">
                                     <ControlStyle ForeColor="White" />
                                     <ItemStyle ForeColor="White" />
                                 </asp:ButtonField>
@@ -57,8 +57,18 @@
                                 <asp:BoundField DataField="MemberName" HeaderText="Medlem" />
                                 <asp:BoundField DataField="Bottles" HeaderText="Flasker" />
                                 <asp:BoundField DataField="TotalAmount" HeaderText="Ordrebeløb" />
-                                <asp:BoundField DataField="Delivered" HeaderText="Leveret" />
-                                <asp:BoundField DataField="Paid" HeaderText="Betalt" />
+                                <asp:BoundField DataField="Delivered" HeaderText="Delivered" />
+                                <asp:BoundField DataField="Paid" HeaderText="Paid" />
+                                <asp:TemplateField HeaderText="Leveret">
+                                    <ItemTemplate>
+                                        <asp:Image ID="ImgDelivered" runat="server" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Betalt">
+                                    <ItemTemplate>
+                                        <asp:Image ID="ImgPaid" runat="server" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                             </Columns>
                             <HeaderStyle Font-Bold="True" Font-Size="Large" />
                         </asp:GridView>
