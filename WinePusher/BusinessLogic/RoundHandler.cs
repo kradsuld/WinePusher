@@ -63,7 +63,7 @@ namespace WinePusher.BusinessLogic
                                                        Store = w.Key.Store,
                                                        WinePrice = w.Key.Price,
                                                        RoundDate = w.Key.Date,
-                                                       RoundStatus = w.Key.Status == "A" ? "Aktiv" : (w.Key.Status == "B" ? "Bestilt" : null),
+                                                       RoundStatus = w.Key.Status == "A" ? "Aktiv" : (w.Key.Status == "C" ? "Afsluttet" : null),
                                                        OrdersCount = w.Key.orderCount
                                                    }).ToList();
             return roundListItemList;

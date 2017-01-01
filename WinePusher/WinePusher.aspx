@@ -22,12 +22,7 @@
             <table class="centered-table" border="0" style="background-color: #990000; color: #FFFFFF">
                 <tr>
                     <td class="HeaderPadding" style="border-width: 0px; text-align: center">
-                        <asp:Image ID="imaHeader" runat="server" ImageUrl="~/Images/banner.jpg" />
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding: 5px; border-width: 0px; text-align: left; vertical-align: top;">
-                        <hr />
+                        <asp:Image ID="imaHeader" runat="server" ImageUrl="~/Images/wp_banner.jpg" />
                     </td>
                 </tr>
                 <tr>

@@ -115,11 +115,11 @@
     <Content Include="CreateOrder.aspx" />
     <Content Include="EditOrder.aspx" />
     <Content Include="CreateRound.aspx" />
-    <Content Include="Images\banner.jpg" />
     <Content Include="Images\check.png" />
     <Content Include="Images\edit.png" />
     <Content Include="Images\insert.png" />
     <Content Include="Images\no.png" />
+    <Content Include="Images\wp_banner.jpg" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
